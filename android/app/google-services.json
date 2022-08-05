@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "733487190699",
+    "project_id": "cama-flutter-project",
+    "storage_bucket": "cama-flutter-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733487190699:android:63f7145e1111f1d5979dee",
+        "android_client_info": {
+          "package_name": "com.example.cama"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "733487190699-ddl5t546kq1df6lr8bbdtn64g0s6nis2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAf5nUCGaeUwauu_UJVpF0g5yXb72t7Jh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "733487190699-ddl5t546kq1df6lr8bbdtn64g0s6nis2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
