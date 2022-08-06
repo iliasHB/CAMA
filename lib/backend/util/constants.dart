@@ -4,3 +4,6 @@ const String FIRST_NAME = "first_name";
 const String LAST_NAME = "last_name";
 const String STATE_CODE = "state_code";
 const String CDS_GROUP = "cds_group";
+const String PHONE_NUMBER = "phone_number";
+const String STATE = "state";
+const String PROFILE_IMAGE = "profileImage";

@@ -21,12 +21,15 @@ class MyApp extends StatelessWidget {
 
   final _viewModel = AuthDependency.authViewModel;
 
-  final user = const UserEntity(
-      email: 'adebc007@gmail.com',
-      firstName: 'Adebisi',
-      lastName: 'Yusuf',
-      stateCode: 'FC/21C/6462',
-      cdsGroup: 'Drug Free');
+  final user = UserEntity(
+    email: 'adebc007@gmail.com',
+    firstName: 'Adebisi',
+    lastName: 'Yusuf',
+    stateCode: 'FC/21C/6462',
+    cdsGroup: 'Drug Free',
+    phoneNumber: '08060713589',
+    state: 'FCT Abuja',
+  );
 
   @override
   Widget build(BuildContext context) {

@@ -27,8 +27,7 @@ class AuthRepoImpl implements AuthRepo {
     final response =
         await remoteSource.signInUser(email: email, password: password);
     if (response.getState() == TaskState.SUCCESS) {
-      await localSource
-          .saveUser(response.getData() ?? const UserEntity.anonymous());
+      await localSource.saveUser(response.getData() ?? UserEntity.anonymous());
     }
     return response;
   }
