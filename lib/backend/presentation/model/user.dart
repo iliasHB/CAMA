@@ -1,3 +1,4 @@
+import 'package:cama/backend/util/status.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../util/constants.dart';
@@ -19,6 +20,8 @@ class UserEntity {
   String get state => _state;
   final String _profileImage;
   String get profileImage => _profileImage;
+  final Privilege _privilege;
+  Privilege get privilege => _privilege;
 
   // initializer list
   UserEntity({
@@ -30,6 +33,7 @@ class UserEntity {
     required String phoneNumber,
     required String state,
     String profileImage = '',
+    Privilege privilege = Privilege.MEMBER,
   })  : _email = email,
         _stateCode = stateCode,
         _firstName = firstName,
@@ -37,7 +41,8 @@ class UserEntity {
         _cdsGroup = cdsGroup,
         _phoneNumber = phoneNumber,
         _state = state,
-        _profileImage = profileImage;
+        _profileImage = profileImage,
+        _privilege = privilege;
 
   // forwarding constructor
   UserEntity.anonymous()

@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
                 email: "adebc007@gmail.com", password: "password");
             if (result.getState() == TaskState.SUCCESS) {
               print('sign in successful with data: ${result.getData()}');
+              print('User Privilege: ${result.getData()?.privilege}');
             } else if (result.getState() == TaskState.FAILED) {
               print(result.getErrorMessage());
             }
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget {
               final result = await _viewModel.getCurrentUser();
               if (result.getState() == TaskState.SUCCESS) {
                 print('Get user: ${result.getData().toString()}');
+                print('Privileges: ${result.getData()?.privilege}');
               } else {
                 print(result.getErrorMessage());
               }
@@ -106,38 +108,4 @@ class MyApp extends StatelessWidget {
       ]),
     );
   }
-
-  /*Future<String> insertUser(Map<String, dynamic> data) async {
-    String result = "None";
-    await firestore.collection("user").add(data).then((docRef) {
-      result = docRef.id.toString();
-    });
-    return result;
-  }
-
-  Future<String> createUser(
-      {required String email, required String password}) async {
-    String result = "no user";
-    try {
-      final UserCredential credential = await _auth
-          .createUserWithEmailAndPassword(email: email, password: password);
-      result = credential.user?.email ?? result;
-    } catch (e) {
-      result = e.toString();
-    }
-    return result;
-  }
-
-  Future<String> signInUser(
-      {required String email, required String password}) async {
-    String result = 'None';
-    try {
-      final credential = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      result = credential.user?.email ?? result;
-    } catch (e) {}
-    return result;
-  }
-
-  String getCurrentUser() => _auth.currentUser?.email ?? "No user";*/
 }

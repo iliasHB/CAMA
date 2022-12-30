@@ -41,13 +41,32 @@ class AuthRemoteImpl implements RemoteAuthDataSource {
                 toFirestore: (UserEntity user, _) => user.toFirestore())
             .get();
         if (docSnapshot.docs.isNotEmpty) {
+          // get user data
+          var user = docSnapshot.docs.first.data();
+          // get user privileges
+          final snapshot = await firestore
+              .collection(PRIV_COLL)
+              .where(EMAIL, isEqualTo: credentials.user?.email)
+              .get();
+          if (snapshot.docs.isNotEmpty) {
+            // if ADMIN
+            user = UserEntity(
+              email: user.email,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              stateCode: user.stateCode,
+              cdsGroup: user.cdsGroup,
+              phoneNumber: user.phoneNumber,
+              state: user.state,
+              privilege: Privilege.OFFICER,
+            );
+          }
           // proceed to return user details for local storage
-          final user = docSnapshot.docs.first.data();
           response = AuthResponse(state: TaskState.SUCCESS, user: user);
         } else {
           response = AuthResponse(
               state: TaskState.FAILED,
-              errorMessage: 'Login successful! User does not exist in DB.');
+              errorMessage: 'Login successful but no user found in DB.');
         }
       } else {
         response = AuthResponse(
@@ -165,52 +184,6 @@ class AuthRemoteImpl implements RemoteAuthDataSource {
         state: TaskState.SUCCESS, successMessage: 'You have been logged out.');
   }
 }
-
-/*@override
-  UserEntity getCurrentUser() {
-    final user = auth.currentUser;
-    if (user == null) {
-      throw NoUserException(message: "No user exists");
-    }
-    String email = "user.email";
-    String firstName = '';
-    String lastName = '';
-    String stateCode = '';
-    String cdsGroup = '';
-    return UserEntity(
-        email: email,
-        firstName: firstName,
-        lastName: lastName,
-        stateCode: stateCode,
-        cdsGroup: cdsGroup);
-  }
-
-  Future<UserEntity> _getUserDetails(String email, [String? id]) async {
-    try {
-      final snapshot = await firestore
-          .collection(CORP_COLL)
-          .where(EMAIL, isEqualTo: email)
-          .limit(1)
-          .get();
-      if (snapshot.docs.isEmpty) {
-        throw NoDocumentFoundException(message: 'User document does not exist');
-      }
-    } catch (e) {
-      throw Exception(e.toString());
-    }
-  }
-
-  @override
-  Future<UserEntity> signInUser(String email, String password) async {
-    try {
-      final credentials = await auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      if (credentials.user.)
-    } on FirebaseAuthException catch (e) {
-      print('Failed with error code:${e.code}');
-      print(e.message);
-    }
-  }*/
 
 class AuthResponse implements Response<UserEntity> {
   final TaskState state;

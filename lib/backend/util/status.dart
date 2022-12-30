@@ -1,5 +1,17 @@
 enum TaskState { SUCCESS, FAILED, LOADING }
 
+enum Privilege { MEMBER, OFFICER }
+
+extension PrivilegeExt on String {
+  Privilege getPrivilege() {
+    var privilege = Privilege.MEMBER;
+    if (toLowerCase() == Privilege.OFFICER.name.toLowerCase()) {
+      privilege = Privilege.OFFICER;
+    }
+    return privilege;
+  }
+}
+
 enum Error { NO_USER, NO_DOCUMENT, UNKNOWN }
 
 extension ErrorExtension on Error {

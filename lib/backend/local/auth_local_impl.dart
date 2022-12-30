@@ -34,6 +34,10 @@ class AuthLocalImpl implements LocalAuthDataSource {
     await preferences.setString(LAST_NAME, user.lastName);
     await preferences.setString(STATE_CODE, user.stateCode);
     await preferences.setString(CDS_GROUP, user.cdsGroup);
+    await preferences.setString(PHONE_NUMBER, user.phoneNumber);
+    await preferences.setString(STATE, user.state);
+    await preferences.setString(PROFILE_IMAGE, user.profileImage);
+    await preferences.setString(PRIVILEGE, user.privilege.name);
   }
 
   UserEntity _getUserData(
@@ -44,12 +48,21 @@ class AuthLocalImpl implements LocalAuthDataSource {
     String lastName = preferences.getString(LAST_NAME) ?? '';
     String stateCode = preferences.getString(STATE_CODE) ?? '';
     String cdsGroup = preferences.getString(CDS_GROUP) ?? '';
+    String phoneNumber = preferences.getString(PHONE_NUMBER) ?? '';
+    String state = preferences.getString(STATE) ?? '';
+    String profileImage = preferences.getString(PROFILE_IMAGE) ?? '';
+    String privilege = preferences.getString(PRIVILEGE) ?? '';
     return UserEntity(
-        email: email,
-        firstName: firstName,
-        lastName: lastName,
-        stateCode: stateCode,
-        cdsGroup: cdsGroup);
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      stateCode: stateCode,
+      cdsGroup: cdsGroup,
+      phoneNumber: phoneNumber,
+      state: state,
+      profileImage: profileImage,
+      privilege: privilege.getPrivilege(),
+    );
   }
 
   Future<void> _deleteUserData(
@@ -60,6 +73,10 @@ class AuthLocalImpl implements LocalAuthDataSource {
     await preferences.remove(LAST_NAME);
     await preferences.remove(STATE_CODE);
     await preferences.remove(CDS_GROUP);
+    await preferences.remove(PHONE_NUMBER);
+    await preferences.remove(STATE);
+    await preferences.remove(PROFILE_IMAGE);
+    await preferences.remove(PRIVILEGE);
   }
 }
 
